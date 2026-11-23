@@ -1,0 +1,20 @@
+Comando pra instalar o argocd
+
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+Rodar o argocd
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+
+Gerar senha
+kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}"
+
+FOI NESSE QUE CONSEGUI POWERSHELL
+[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String((kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}")))
+
+
+MEU COMANDO
+kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | %{ [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($_)) }
+
+
+senha do argo
+O2dWWnDF0-7pTGB1
